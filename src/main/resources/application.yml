@@ -1,0 +1,22 @@
+#tomcat的配置
+server:
+  port: 808
+  error:
+    path: /error
+  servlet:
+  #项目访问路径
+    context-path: /security
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 500
+spring:
+#模版thymeleaf配置
+  thymeleaf:
+    #路径
+    prefix: classpath:/public/
+    #后缀
+    suffix: .html
+    servlet:
+      content-type: text/html
+    encoding: UTF-8
+    mode: HTML5
