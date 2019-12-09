@@ -19,23 +19,34 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	    PasswordEncoder passwordEncoder() {
 	        return new BCryptPasswordEncoder();
 	    }
+	 
+	 @Autowired
+		public void config(AuthenticationManagerBuilder auth) throws Exception {
+			auth.inMemoryAuthentication()
+					.withUser("li")
+					.password("$2a$10$0taMD3JJvlxnp6J8y5OWfO6ANMzyvmnl1JPjJRDK/xJiYbfIWWSSC")
+					.roles("USER")
+					.and()
+					.withUser("admin")
+					.password("$2a$10$juelhnkt08Pa7BKJwxZCau4Luzq2z9ZP5vAFVc39jtdRQGMnRC3Nq")
+					.roles("ADMIN","USER");
+					
+			
+		}
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/").hasRole("USER").anyRequest().authenticated().and()
+		http.authorizeRequests()
+				.antMatchers("/","/error").permitAll()
+				.antMatchers("/hello").hasRole("USER")
+				.antMatchers("/admin").hasRole("ADMIN")
+				.anyRequest().authenticated().and()
 				.formLogin().loginPage("/login").permitAll().and().logout().permitAll()
 				.and().rememberMe()
 				.rememberMeParameter("rememberme").tokenValiditySeconds(60);
 
 	}
 
-	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication()
-				.withUser("li")
-				.password("$2a$10$0taMD3JJvlxnp6J8y5OWfO6ANMzyvmnl1JPjJRDK/xJiYbfIWWSSC")
-				.roles("USER");
-
-	}
+	
 
 }

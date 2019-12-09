@@ -6,7 +6,7 @@ public class Bc {
 
 	public static void main(String[] args) {
 		BCryptPasswordEncoder bCryptPasswordEncoder=new BCryptPasswordEncoder();
-		String a="123456";
+		String a="123";
 		a=bCryptPasswordEncoder.encode(a);
 		System.out.println(a);
 

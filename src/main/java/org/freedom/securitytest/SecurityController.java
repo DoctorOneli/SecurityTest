@@ -1,36 +1,39 @@
 package org.freedom.securitytest;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-@RestController
+@Controller
 public class SecurityController {
 
 	@GetMapping("/")
-	public ModelAndView index()
+	public String index()
 	{
-		ModelAndView modelAndView=new ModelAndView();
-		modelAndView.setViewName("index");
-		return modelAndView;
+		return "index";
+	}
+	
+	
+	@GetMapping("/login")
+	public String login()
+	{
+		return "login";
 	}
 	
 	@GetMapping("/hello")
-	public ModelAndView hello()
+	public String hello()
 	{
-		ModelAndView modelAndView=new ModelAndView();
-		modelAndView.setViewName("hello");
-		return modelAndView;
+		return "hello";
 	}
 	
-	@RequestMapping("/login")
-	public ModelAndView login()
+	
+	@GetMapping("/admin")
+	public String admin()
 	{
-		ModelAndView modelAndView=new ModelAndView();
-		modelAndView.setViewName("login");
-		return modelAndView;
+		return "admin";
 	}
 	
 	
